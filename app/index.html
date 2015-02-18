@@ -8,6 +8,31 @@
 </head>
 
 <body>
+    <section id="todoapp">
+        <header id="header">
+            <h1>Ma Todo</h1>
+            <form id="todo-form" autocomplete="off">
+                <input id="new-todo" placeholder="Nouvelle tâche" autofocus>
+            </form>
+        </header>
+        <section id="main">
+            <input type="checkbox" id="toggle-all">
+            <label for="toggle-all"></label>
+            <ul id="todo-list">
+                <!-- li class="completed" ou li class="editing" -->
+                <li>
+                    <div class="view">
+                        <input type="checkbox" class="toggle">
+                        <label>Ma première tâche</label>
+                        <button class="destroy"></button>
+                    </div>
+                    <form>
+                        <input class="edit"></input>
+                    </form>
+                </li>
+            </ul>
+        </section>
+    </section>
     <script src="/bower_components/angular/angular.min.js"></script>
 </body>
 
