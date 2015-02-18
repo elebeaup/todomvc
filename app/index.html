@@ -11,8 +11,8 @@
     <section id="todoapp">
         <header id="header">
             <h1>Ma Todo</h1>
-            <form id="todo-form" autocomplete="off">
-                <input id="new-todo" placeholder="Nouvelle tâche" autofocus>
+            <form action="#" id="todo-form">
+                <input id="new-todo" placeholder="Nouvelle tâche" autofocus autocomplete="off">
             </form>
         </header>
         <section id="main">
@@ -26,12 +26,15 @@
                         <label>Ma première tâche</label>
                         <button class="destroy"></button>
                     </div>
-                    <form>
+                    <form action="#">
                         <input class="edit"></input>
                     </form>
                 </li>
             </ul>
         </section>
+        <footer id="footer">
+            <span id="todo-count"><strong>3</strong> tâches restantes</span>
+        </footer>
     </section>
     <script src="/bower_components/angular/angular.min.js"></script>
 </body>
