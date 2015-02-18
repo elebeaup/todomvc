@@ -8,35 +8,10 @@
 </head>
 
 <body data-ng-app="todoapp">
-    <section id="todoapp" data-ng-controller="TodoCtrl">
-        <header id="header">
-            <h1>Ma Todo</h1>
-            <form id="todo-form" data-ng-submit="addTodo()">
-                <input id="new-todo" placeholder="Nouvelle tâche" autofocus autocomplete="off" data-ng-model="newTodo">
-            </form>
-        </header>
-        <section id="main">
-            <input type="checkbox" id="toggle-all" data-ng-model="completed" data-ng-click="checkAllTodo(completed)">
-            <label for="toggle-all"></label>
-            <ul id="todo-list">
-                <!-- li class="completed" ou li class="editing" -->
-                <li data-ng-repeat="todo in todos" data-ng-class="{completed : todo.completed, editing : todo.editing}" data-ng-dblclick="editTodo(todo, true)">
-                    <div class="view">
-                        <input type="checkbox" class="toggle" data-ng-model="todo.completed">
-                        <label>{{todo.name}}</label>
-                        <button class="destroy" data-ng-click="removeTodo($index)"></button>
-                    </div>
-                    <form>
-                        <input class="edit" data-ng-model="todo.name" data-todo-escape="revertTodo(todo)" data-ng-blur="editTodo(todo, false)"></input>
-                    </form>
-                </li>
-            </ul>
-        </section>
-        <footer id="footer">
-            <span id="todo-count"><strong>{{remaining}}</strong> tâches restantes</span>
-        </footer>
-    </section>
+    <ng-view />
+
     <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
     <script src="/scripts/app.js"></script>
 </body>
 
