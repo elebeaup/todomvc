@@ -27,7 +27,7 @@
                         <button class="destroy" data-ng-click="removeTodo($index)"></button>
                     </div>
                     <form>
-                        <input class="edit" data-ng-model="todo.name" data-ng-blur="editTodo(todo, false)"></input>
+                        <input class="edit" data-ng-model="todo.name" data-todo-escape="revertTodo(todo)" data-ng-blur="editTodo(todo, false)"></input>
                     </form>
                 </li>
             </ul>

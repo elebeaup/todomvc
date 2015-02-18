@@ -40,5 +40,32 @@ app.controller('TodoCtrl', ['$scope', '$filter', function($scope, $filter) {
 
     $scope.editTodo = function(todo, editing) {
         todo.editing = editing;
+
+        if (editing === true) {
+            // Clone the original todo to restore it on demand.
+            $scope.originalTodo = angular.extend({}, todo);
+            $scope.originalTodo.editing = false;
+        }
     };
-}])
+
+    $scope.revertTodo = function(todo) {
+        todos[todos.indexOf(todo)] = $scope.originalTodo;
+    };
+}]);
+
+app.directive('todoEscape', function() {
+
+    var ESCAPE_KEY = 27;
+
+    return {
+        restrict : 'A',
+        // Par défaut, équivalent à postlink
+        link: function(scope, elem, attrs) {
+            elem.bind('keydown', function(event) {
+                if (event.keyCode === ESCAPE_KEY) {
+                    scope.$apply(attrs.todoEscape);
+                }
+            });
+        }
+    };
+});
