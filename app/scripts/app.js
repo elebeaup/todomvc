@@ -1,8 +1,8 @@
 'use strict';
 
-var app = angular.module('todoapp', []);
+var app = angular.module('todoapp', ['ngRoute']);
 
-app.controller('TodoCtrl', ['$scope', '$filter', function($scope, $filter) {
+app.controller('TodoCtrl', ['$scope', '$filter', '$routeParams', function($scope, $filter, $routeParams) {
     $scope.todos = [{
         'name': 'Ma première tâche',
         'completed': true
@@ -51,6 +51,17 @@ app.controller('TodoCtrl', ['$scope', '$filter', function($scope, $filter) {
     $scope.revertTodo = function(todo) {
         todos[todos.indexOf(todo)] = $scope.originalTodo;
     };
+
+    // Monitor the current route for changes and adjust the filter accordingly.
+    $scope.$on('$routeChangeSuccess', function() {
+        var status = $scope.status = $routeParams.status || '';
+
+        $scope.statusFilter = (status === 'active') ? {
+            completed: false
+        } : (status === 'completed') ? {
+            completed: true
+        } : null;
+    });
 }]);
 
 app.directive('todoEscape', function() {
@@ -58,7 +69,7 @@ app.directive('todoEscape', function() {
     var ESCAPE_KEY = 27;
 
     return {
-        restrict : 'A',
+        restrict: 'A',
         // Par défaut, équivalent à postlink
         link: function(scope, elem, attrs) {
             elem.bind('keydown', function(event) {
@@ -69,3 +80,17 @@ app.directive('todoEscape', function() {
         }
     };
 });
+
+app.config(['$routeProvider', function($routeProvider) {
+    var routeConfig = {
+        controller: 'TodoCtrl',
+        templateUrl: 'todo-index.html'
+    };
+
+    $routeProvider
+        .when('/', routeConfig)
+        .when('/:status', routeConfig)
+        .otherwise({
+            redirectTo: '/'
+        });
+}]);
